@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TikTok Video Downloader</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div class="app">
+    <div id="integrity-banner" class="integrity-banner hidden" role="alert"></div>
+
+    <header class="header">
+      <div class="brand">
+        <img src="icons/icon48.png" alt="TikTok Video Downloader" class="brand-icon" />
+        <div>
+          <h1 id="brand-title">TikTok Video Downloader</h1>
+          <span id="brand-subtitle" class="subtitle">Filigransız TikTok İndirici</span>
+        </div>
+      </div>
+      <div class="header-right">
+        <div class="lang-switch" role="group" aria-label="Language">
+          <button type="button" id="lang-tr" class="lang-btn">TR</button>
+          <button type="button" id="lang-en" class="lang-btn">EN</button>
+        </div>
+        <span class="pro-badge">HD</span>
+      </div>
+    </header>
+
+    <nav class="tabs" role="tablist">
+      <button id="tab-btn-download" class="tab active" data-tab="download">İndir</button>
+      <button id="tab-btn-history" class="tab" data-tab="history">Geçmiş</button>
+      <button id="tab-btn-settings" class="tab" data-tab="settings">Ayarlar</button>
+    </nav>
+
+    <!-- İNDİR SEKMESİ -->
+    <main id="tab-download" class="tab-panel active">
+      <div class="input-group">
+        <input
+          type="text"
+          id="url-input"
+          placeholder="TikTok video linkini yapıştırın..."
+          autocomplete="off"
+        />
+        <button id="paste-btn" class="icon-btn" title="Panodan Yapıştır">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="9" y="9" width="13" height="13" rx="2"/>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+          </svg>
+        </button>
+        <button id="fetch-btn" class="primary-sm-btn">Getir</button>
+      </div>
+
+      <div id="status-box" class="status-box hidden"></div>
+
+      <div id="preview-card" class="preview-card hidden">
+        <div class="preview-top">
+          <div class="thumb-wrap">
+            <img id="preview-cover" src="" alt="Kapak" />
+            <span id="preview-duration" class="duration-badge"></span>
+          </div>
+          <div class="meta">
+            <div class="author-row">
+              <span id="preview-author" class="author">@kullanici</span>
+              <span id="preview-source" class="source-tag"></span>
+            </div>
+            <p id="preview-title" class="caption"></p>
+            <div id="preview-stats" class="stats-row"></div>
+          </div>
+        </div>
+
+        <div class="download-actions">
+          <button id="dl-hd" class="btn-primary">
+            <span id="dl-hd-label">HD Filigransız İndir</span>
+            <span id="dl-hd-tag" class="btn-tag">MP4</span>
+          </button>
+          <div class="btn-grid">
+            <button id="dl-sd" class="btn-secondary">Standart MP4</button>
+            <button id="dl-mp3" class="btn-secondary">Ses (MP3)</button>
+            <button id="dl-gif" class="btn-secondary">GIF İndir</button>
+            <button id="dl-images" class="btn-secondary hidden">Fotoğraflar (JPG)</button>
+            <button id="dl-live" class="btn-secondary hidden">Live Photo (MP4)</button>
+            <button id="dl-cover" class="btn-secondary">Kapak (JPG)</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="empty-hint" class="empty-hint">
+        <p id="empty-hint-text">Bir TikTok videosu açıkken eklentiyi açın veya yukarıya video bağlantısı yapıştırın.</p>
+      </div>
+    </main>
+
+    <!-- GEÇMİŞ SEKMESİ -->
+    <main id="tab-history" class="tab-panel">
+      <div class="history-header">
+        <span id="history-title">Son İndirilenler</span>
+        <button id="clear-history-btn" class="text-btn">Temizle</button>
+      </div>
+      <div id="history-list" class="history-list"></div>
+    </main>
+
+    <!-- AYARLAR SEKMESİ -->
+    <main id="tab-settings" class="tab-panel">
+      <div class="setting-item">
+        <div>
+          <div id="lbl-inject-title" class="setting-title">TikTok'ta İndir Butonları</div>
+          <div id="lbl-inject-desc" class="setting-desc">Videoların ve fotoğrafların üzerinde hızlı indirme butonu göster</div>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="opt-inject" />
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="setting-item">
+        <div>
+          <div id="lbl-quality-title" class="setting-title">Varsayılan Kalite</div>
+          <div id="lbl-quality-desc" class="setting-desc">Tek tıkla indirmede kullanılacak format</div>
+        </div>
+        <select id="opt-quality" class="select-input">
+          <option id="opt-q-hd" value="hd">HD (Yüksek Bitrate)</option>
+          <option id="opt-q-sd" value="sd">Akıcı H.264 (Standart)</option>
+        </select>
+      </div>
+
+      <div class="setting-item">
+        <div>
+          <div id="lbl-zip-title" class="setting-title">Fotoğrafları ZIP İndir</div>
+          <div id="lbl-zip-desc" class="setting-desc">Slayt fotoğraflarını tek bir .zip dosyasında paketle</div>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="opt-zip" />
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="setting-item">
+        <div>
+          <div id="lbl-pattern-title" class="setting-title">Dosya Adı Formatı</div>
+          <div id="lbl-pattern-desc" class="setting-desc">İndirilen dosyaların adlandırma şekli</div>
+        </div>
+        <select id="opt-pattern" class="select-input">
+          <option id="opt-p-author" value="{author}_{id}">@kullanici_id</option>
+          <option id="opt-p-title" value="{title}_{id}">baslik_id</option>
+          <option id="opt-p-id" value="{id}">sadece_id</option>
+        </select>
+      </div>
+
+      <div class="setting-item">
+        <div>
+          <div id="lbl-saveas-title" class="setting-title">Farklı Kaydet Penceresi</div>
+          <div id="lbl-saveas-desc" class="setting-desc">Her indirmede kayıt yerini sor</div>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="opt-saveas" />
+          <span class="slider"></span>
+        </label>
+      </div>
+    </main>
+
+    <footer id="brand-footer" class="brand-footer">
+      <span>TikTok Video Downloader • Created by <a href="https://github.com/zodi4ctvn" target="_blank" rel="noopener noreferrer">Zodi4c</a></span>
+    </footer>
+  </div>
+  <script src="gif-encoder.js"></script>
+  <script src="zip-builder.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,289 @@
+/* TikTok Video Downloader — Injected UI Styles */
+
+.ttvd-action-wrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 6px 0 8px 0;
+  z-index: 50;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.ttvd-action-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(24, 24, 32, 0.78);
+  color: #ffffff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.16s ease, background 0.16s ease, box-shadow 0.16s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+  position: relative;
+  padding: 0;
+}
+
+.ttvd-action-btn:hover {
+  transform: scale(1.08);
+  background: linear-gradient(135deg, rgba(37, 244, 238, 0.28), rgba(254, 44, 85, 0.28));
+  box-shadow: 0 0 14px rgba(37, 244, 238, 0.35);
+}
+
+.ttvd-action-btn.ttvd-loading {
+  pointer-events: none;
+  opacity: 0.85;
+}
+
+.ttvd-action-btn.ttvd-done {
+  background: rgba(16, 185, 129, 0.28);
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.45);
+}
+
+.ttvd-action-btn-box {
+  position: relative;
+  width: 48px;
+  height: 48px;
+}
+
+.ttvd-action-more {
+  position: absolute;
+  right: -3px;
+  bottom: -3px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: #18181f;
+  color: #e5e7eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.ttvd-action-more:hover {
+  background: #2c2c38;
+  transform: scale(1.1);
+}
+
+.ttvd-action-label {
+  margin-top: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.78);
+  text-align: center;
+  user-select: none;
+  line-height: 1;
+}
+
+/* Floating button for video player / profile cards */
+.ttvd-floating-wrap {
+  position: absolute;
+  top: 72px;
+  right: 16px;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.ttvd-floating-wrap.ttvd-compact {
+  top: 8px;
+  right: 8px;
+  opacity: 0;
+  transition: opacity 0.18s ease;
+}
+
+*:hover > .ttvd-floating-wrap.ttvd-compact,
+.ttvd-floating-wrap.ttvd-compact:hover,
+.ttvd-floating-wrap.ttvd-compact.ttvd-menu-open {
+  opacity: 1;
+}
+
+.ttvd-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 34px;
+  padding: 0 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(18, 18, 24, 0.88);
+  color: #ffffff;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+  transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+}
+
+.ttvd-compact .ttvd-pill-btn {
+  height: 28px;
+  padding: 0 9px;
+  font-size: 11px;
+}
+
+.ttvd-pill-btn:hover {
+  transform: translateY(-1px);
+  background: linear-gradient(135deg, #161823, #231826);
+  border-color: rgba(37, 244, 238, 0.65);
+}
+
+.ttvd-pill-btn.ttvd-loading {
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+.ttvd-more-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(18, 18, 24, 0.88);
+  color: #ffffff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: background 0.15s ease;
+}
+
+.ttvd-floating-wrap:not(.ttvd-compact) .ttvd-more-btn {
+  width: 34px;
+  height: 34px;
+}
+
+.ttvd-more-btn:hover {
+  background: rgba(254, 44, 85, 0.85);
+}
+
+/* Format Dropdown Menu */
+.ttvd-dropdown {
+  position: fixed;
+  min-width: 182px;
+  max-height: calc(100vh - 24px);
+  overflow-y: auto;
+  background: rgba(20, 20, 28, 0.97);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 12px;
+  padding: 5px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
+  display: none;
+  flex-direction: column;
+  gap: 1px;
+  z-index: 2147483646;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.ttvd-dropdown.ttvd-open {
+  display: flex;
+}
+
+.ttvd-dropdown-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  padding: 5px 8px;
+  border: none;
+  border-radius: 7px;
+  background: transparent;
+  color: #f3f4f6;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: left;
+  white-space: nowrap;
+  transition: background 0.12s ease;
+}
+
+.ttvd-dropdown-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.ttvd-badge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 5px;
+  border-radius: 4px;
+  background: rgba(37, 244, 238, 0.18);
+  color: #25f4ee;
+}
+
+.ttvd-badge.pink {
+  background: rgba(254, 44, 85, 0.2);
+  color: #ff4d70;
+}
+
+/* Spinner */
+.ttvd-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  border-top-color: #25f4ee;
+  border-radius: 50%;
+  animation: ttvd-spin 0.7s linear infinite;
+}
+
+@keyframes ttvd-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Toast Notification */
+#ttvd-toast-container {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 2147483647;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  pointer-events: none;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.ttvd-toast {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 16px;
+  border-radius: 12px;
+  background: rgba(18, 18, 25, 0.94);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 500;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
+  animation: ttvd-slide-in 0.22s ease;
+  max-width: 340px;
+}
+
+.ttvd-toast.success {
+  border-color: rgba(16, 185, 129, 0.5);
+}
+
+.ttvd-toast.error {
+  border-color: rgba(254, 44, 85, 0.6);
+}
+
+@keyframes ttvd-slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

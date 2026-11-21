@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Check JavaScript syntax
+        run: |
+          node --check background.js
+          node --check content.js
+          node --check popup.js
+          node --check gif-encoder.js
+          node --check zip-builder.js
+
+      - name: Validate manifest and attribution
+        run: |
+          node -e "
+            const fs = require('fs');
+            const m = JSON.parse(fs.readFileSync('manifest.json', 'utf8'));
+            if (m.manifest_version !== 3) throw new Error('Expected Manifest V3');
+            if (!m.name.includes('TikTok Video Downloader')) throw new Error('Invalid name');
+            if (!m.author.includes('Zodi4c')) throw new Error('Invalid author');
+            if (!m.description.includes('Zodi4c')) throw new Error('Invalid description');
+            console.log('Manifest & attribution OK:', m.name, m.version);
+          "
